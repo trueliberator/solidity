@@ -333,6 +333,7 @@ wasm::FunctionDefinition WasmCodeTransform::translateFunction(yul::FunctionDefin
 		fun.parameters.push_back({param.name.str(), translatedType(param.type)});
 	for (auto const& retParam: _fun.returnVariables)
 		fun.locals.emplace_back(wasm::VariableDeclaration{retParam.name.str(), translatedType(retParam.type)});
+	yulAssert(_fun.returnVariables.size() <= 1, "Only up to 1 return variable supported.");
 	if (!_fun.returnVariables.empty())
 		fun.returnType = translatedType(_fun.returnVariables[0].type);
 
