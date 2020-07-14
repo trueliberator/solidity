@@ -253,6 +253,7 @@ wasm::Expression WasmCodeTransform::operator()(yul::ForLoop const& _for)
 	m_breakContinueLabelNames.push({breakLabel, continueLabel});
 
 	yul::Type conditionType = m_typeInfo.typeOf(*_for.condition);
+	yulAssert(conditionType == "i32"_yulstring || conditionType == "i64"_yulstring, "");
 	YulString eqz_instruction = YulString(conditionType.str() + ".eqz");
 	yulAssert(WasmDialect::instance().builtin(eqz_instruction), "");
 
@@ -275,11 +276,13 @@ wasm::Expression WasmCodeTransform::operator()(yul::ForLoop const& _for)
 
 wasm::Expression WasmCodeTransform::operator()(yul::Break const&)
 {
+	yulAssert(m_breakContinueLabelNames.count() > 1, "");
 	return wasm::Branch{wasm::Label{m_breakContinueLabelNames.top().first}};
 }
 
 wasm::Expression WasmCodeTransform::operator()(yul::Continue const&)
 {
+	yulAssert(m_breakContinueLabelNames.count() > 1, "");
 	return wasm::Branch{wasm::Label{m_breakContinueLabelNames.top().second}};
 }
 
