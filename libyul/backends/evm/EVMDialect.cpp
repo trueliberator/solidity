@@ -144,10 +144,10 @@ map<YulString, BuiltinFunctionForEVM> createBuiltins(langutil::EVMVersion _evmVe
 		}));
 
 		builtins.emplace(createFunction(
-			"initfreemptr",
+			"freememorystart",
 			1,
-			0,
-			SideEffects{false, false, false, false, true},
+			1,
+			SideEffects{true, true, true, false, false},
 			{LiteralKind::Number},
 			[](
 				FunctionCall const& _call,
@@ -156,8 +156,6 @@ map<YulString, BuiltinFunctionForEVM> createBuiltins(langutil::EVMVersion _evmVe
 				function<void(Expression const&)> _visitExpression
 			) {
 				visitArguments(_assembly, _call, _visitExpression);
-				_assembly.appendConstant(0x40);
-				_assembly.appendInstruction(evmasm::Instruction::MSTORE);
 			})
 		);
 
