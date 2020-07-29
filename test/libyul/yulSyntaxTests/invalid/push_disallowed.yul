@@ -35,35 +35,35 @@
 }
 // ----
 // DeclarationError 4619: (6-11): Function not found.
-// DeclarationError 4619: (18-23): Function not found.
-// DeclarationError 4619: (30-35): Function not found.
-// DeclarationError 4619: (42-47): Function not found.
-// DeclarationError 4619: (54-59): Function not found.
-// DeclarationError 4619: (66-71): Function not found.
-// DeclarationError 4619: (78-83): Function not found.
-// DeclarationError 4619: (90-95): Function not found.
-// DeclarationError 4619: (102-107): Function not found.
-// DeclarationError 4619: (114-119): Function not found.
-// DeclarationError 4619: (126-132): Function not found.
-// DeclarationError 4619: (139-145): Function not found.
-// DeclarationError 4619: (152-158): Function not found.
-// DeclarationError 4619: (165-171): Function not found.
-// DeclarationError 4619: (178-184): Function not found.
-// DeclarationError 4619: (191-197): Function not found.
-// DeclarationError 4619: (204-210): Function not found.
-// DeclarationError 4619: (217-223): Function not found.
-// DeclarationError 4619: (230-236): Function not found.
-// DeclarationError 4619: (243-249): Function not found.
-// DeclarationError 4619: (256-262): Function not found.
-// DeclarationError 4619: (269-275): Function not found.
-// DeclarationError 4619: (282-288): Function not found.
-// DeclarationError 4619: (295-301): Function not found.
-// DeclarationError 4619: (308-314): Function not found.
-// DeclarationError 4619: (321-327): Function not found.
-// DeclarationError 4619: (334-340): Function not found.
-// DeclarationError 4619: (347-353): Function not found.
-// DeclarationError 4619: (360-366): Function not found.
-// DeclarationError 4619: (373-379): Function not found.
-// DeclarationError 4619: (386-392): Function not found.
-// DeclarationError 4619: (399-405): Function not found.
-// DeclarationError 4619: (412-418): Function not found.
+// TypeError 5017: (18-23): The identifier "push1" can not be used.
+// TypeError 5017: (30-35): The identifier "push2" can not be used.
+// TypeError 5017: (42-47): The identifier "push3" can not be used.
+// TypeError 5017: (54-59): The identifier "push4" can not be used.
+// TypeError 5017: (66-71): The identifier "push5" can not be used.
+// TypeError 5017: (78-83): The identifier "push6" can not be used.
+// TypeError 5017: (90-95): The identifier "push7" can not be used.
+// TypeError 5017: (102-107): The identifier "push8" can not be used.
+// TypeError 5017: (114-119): The identifier "push9" can not be used.
+// TypeError 5017: (126-132): The identifier "push10" can not be used.
+// TypeError 5017: (139-145): The identifier "push11" can not be used.
+// TypeError 5017: (152-158): The identifier "push12" can not be used.
+// TypeError 5017: (165-171): The identifier "push13" can not be used.
+// TypeError 5017: (178-184): The identifier "push14" can not be used.
+// TypeError 5017: (191-197): The identifier "push15" can not be used.
+// TypeError 5017: (204-210): The identifier "push16" can not be used.
+// TypeError 5017: (217-223): The identifier "push17" can not be used.
+// TypeError 5017: (230-236): The identifier "push18" can not be used.
+// TypeError 5017: (243-249): The identifier "push19" can not be used.
+// TypeError 5017: (256-262): The identifier "push20" can not be used.
+// TypeError 5017: (269-275): The identifier "push21" can not be used.
+// TypeError 5017: (282-288): The identifier "push22" can not be used.
+// TypeError 5017: (295-301): The identifier "push23" can not be used.
+// TypeError 5017: (308-314): The identifier "push24" can not be used.
+// TypeError 5017: (321-327): The identifier "push25" can not be used.
+// TypeError 5017: (334-340): The identifier "push26" can not be used.
+// TypeError 5017: (347-353): The identifier "push27" can not be used.
+// TypeError 5017: (360-366): The identifier "push28" can not be used.
+// TypeError 5017: (373-379): The identifier "push29" can not be used.
+// TypeError 5017: (386-392): The identifier "push30" can not be used.
+// TypeError 5017: (399-405): The identifier "push31" can not be used.
+// TypeError 5017: (412-418): The identifier "push32" can not be used.
