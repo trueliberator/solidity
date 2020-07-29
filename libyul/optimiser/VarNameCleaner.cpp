@@ -110,7 +110,7 @@ YulString VarNameCleaner::findCleanName(YulString const& _name) const
 
 bool VarNameCleaner::isUsedName(YulString const& _name) const
 {
-	if (_name.empty() || m_dialect.builtin(_name) || m_usedNames.count(_name))
+	if (_name.empty() || m_dialect.reservedIdentifier(_name) || m_usedNames.count(_name))
 		return true;
 	return false;
 }

@@ -57,7 +57,7 @@ YulString NameDispenser::newName(YulString _nameHint)
 
 bool NameDispenser::illegalName(YulString _name)
 {
-	if (_name.empty() || m_usedNames.count(_name) || m_dialect.builtin(_name))
+	if (_name.empty() || m_dialect.reservedIdentifier(_name) || m_usedNames.count(_name))
 		return true;
 	return false;
 }
