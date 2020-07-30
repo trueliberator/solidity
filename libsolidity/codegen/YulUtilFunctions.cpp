@@ -1959,16 +1959,45 @@ string YulUtilFunctions::conversionFunction(Type const& _from, Type const& _to)
 
 			solUnimplementedAssert(!fromStructType.isDynamicallyEncoded(), "");
 			solUnimplementedAssert(toStructType.location() == DataLocation::Memory, "");
-			solUnimplementedAssert(fromStructType.location() == DataLocation::CallData, "");
+			solUnimplementedAssert(fromStructType.location() != DataLocation::Memory, "");
 
-			Whiskers t(R"(
-				converted := <abiDecode>(value, add(value, calldatasize()))
-			)");
-			t("abiDecode", ABIFunctions(m_evmVersion, m_revertStrings, m_functionCollector).tupleDecoder(
-				{&toStructType}
-			));
+			if (fromStructType.location() == DataLocation::CallData)
+			{
+				body = Whiskers(R"(
+					converted := <abiDecode>(value, add(value, calldatasize()))
+				)")
+				("abiDecode", ABIFunctions(m_evmVersion, m_revertStrings, m_functionCollector).tupleDecoder(
+						{&toStructType}
+				))
+				.render();
+			}
+			else
+			{
+				solAssert(fromStructType.location() == DataLocation::Storage, "");
+				MemberList::MemberMap toStructMembers = toStructType.nativeMembers(nullptr);
+				MemberList::MemberMap fromStructMembers = fromStructType.nativeMembers(nullptr);
+				vector<map<string, string>> memberOffsetsAndSlots(toStructMembers.size());
+				for (size_t i = 0; i < toStructMembers.size(); ++i)
+				{
+					auto const& [memberSlotDiff, memberStorageOffset] = fromStructType.storageOffsetsOfMember(toStructMembers[i].name);
 
-			body = t.render();
+					memberOffsetsAndSlots[i]["memberMemoryOffset"] = toStructType.memoryOffsetOfMember(toStructMembers[i].name).str();
+					memberOffsetsAndSlots[i]["memberSlotDiff"] = memberSlotDiff.str();
+					memberOffsetsAndSlots[i]["memberStorageOffset"] = to_string(memberStorageOffset);
+					memberOffsetsAndSlots[i]["readFromStorage"] = readFromStorageDynamic(*fromStructMembers[i].type, true);
+				}
+
+				body = Whiskers(R"(
+					converted := <allocStruct>()
+					<#member>
+						mstore(add(converted, <memberMemoryOffset>), <readFromStorage>(add(value, <memberSlotDiff>), <memberStorageOffset>))
+					</member>
+				)")
+				("allocStruct", allocateMemoryStructFunction(toStructType))
+				("member", memberOffsetsAndSlots)
+				.render();
+			}
+
 			break;
 		}
 		case Type::Category::FixedBytes:
