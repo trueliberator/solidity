@@ -1752,9 +1752,9 @@ void TypeChecker::typeCheckFunctionCall(
 
 	if (_functionType->kind() == FunctionType::Kind::Declaration)
 	{
+		solAssert(_functionType->declaration().annotation().contract, "");
 		if (
 			m_currentContract &&
-			_functionType->declaration().annotation().contract &&
 			m_currentContract->derivesFrom(*_functionType->declaration().annotation().contract) &&
 			!dynamic_cast<FunctionDefinition const&>(_functionType->declaration()).isImplemented()
 		)
