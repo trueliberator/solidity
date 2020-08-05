@@ -354,7 +354,7 @@ TestCase::TestResult YulOptimizerTest::run(ostream& _stream, string const& _line
 	else if (m_optimizerStep == "stackLimitEvader")
 	{
 		yul::Object obj;
-		obj.code = m_ast;
+		obj.code = m_object->code;
 		obj.analysisInfo = m_analysisInfo;
 		disambiguate();
 		StackLimitEvader::run(*m_context, obj, CompilabilityChecker{
@@ -366,7 +366,7 @@ TestCase::TestResult YulOptimizerTest::run(ostream& _stream, string const& _line
 	else if (m_optimizerStep == "fakeStackLimitEvader")
 	{
 		yul::Object obj;
-		obj.code = m_ast;
+		obj.code = m_object->code;
 		obj.analysisInfo = m_analysisInfo;
 		disambiguate();
 		// Mark all variables with a name starting with "$" for escalation to memory.
